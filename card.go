@@ -32,7 +32,7 @@ func (c Card) ValueHigh() (int, error) {
 
 	for _, v := range validTypes {
 		switch v {
-		case "K", "Q", "J", "10":
+		case "K", "Q", "J":
 			values[v] = []int{10}
 		case "A":
 			values["A"] = []int{1, 11}
