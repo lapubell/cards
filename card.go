@@ -1,6 +1,9 @@
 package cards
 
-import "errors"
+import (
+	"errors"
+	"strconv"
+)
 
 // Card this struct represents a card in the standard American 52 card deck
 type Card struct {
@@ -26,20 +29,18 @@ func (c Card) ValueHigh() (int, error) {
 		return 0, errors.New("Invalid Card")
 	}
 	values := make(map[string][]int, 52)
-	values["A"] = []int{1, 11}
-	values["K"] = []int{10}
-	values["Q"] = []int{10}
-	values["J"] = []int{10}
-	values["1"] = []int{1}
-	values["2"] = []int{2}
-	values["3"] = []int{3}
-	values["4"] = []int{4}
-	values["5"] = []int{5}
-	values["6"] = []int{6}
-	values["7"] = []int{7}
-	values["8"] = []int{8}
-	values["9"] = []int{9}
-	values["10"] = []int{10}
+
+	for _, v := range validTypes {
+		switch v {
+		case "K", "Q", "J", "10":
+			values[v] = []int{10}
+		case "A":
+			values["A"] = []int{1, 11}
+		default:
+			value, _ := strconv.Atoi(v)
+			values[v] = []int{value}
+		}
+	}
 
 	return values[c.Type][0], nil
 }
