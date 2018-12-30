@@ -7,15 +7,15 @@ import (
 
 // Card this struct represents a card in the standard American 52 card deck
 type Card struct {
-	Suit string
+	Suit Suit
 	Type string
 }
 
-var validTypes = [...]string{"A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
+var validCardTypes = [...]string{"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"}
 
 // IsValid return a bool based on the Card.Type
 func (c Card) IsValid() bool {
-	for _, val := range validTypes {
+	for _, val := range validCardTypes {
 		if c.Type == val {
 			return true
 		}
@@ -30,12 +30,12 @@ func (c Card) ValueHigh() (int, error) {
 	}
 	values := make(map[string][]int, 52)
 
-	for _, v := range validTypes {
+	for _, v := range validCardTypes {
 		switch v {
 		case "K", "Q", "J":
 			values[v] = []int{10}
 		case "A":
-			values["A"] = []int{1, 11}
+			values["A"] = []int{11, 1}
 		default:
 			value, _ := strconv.Atoi(v)
 			values[v] = []int{value}
