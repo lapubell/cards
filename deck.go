@@ -34,3 +34,8 @@ func (d Deck) Shuffle() {
 		d.Cards[i], d.Cards[rand] = d.Cards[rand], d.Cards[i]
 	}
 }
+
+// Deal return dealt cards (first return) and remaining cards (second return)
+func deal(d Deck, handSize int) ([]Card, []Card) {
+	return d.Cards[:handSize], d.Cards[handSize:]
+}
