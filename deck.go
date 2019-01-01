@@ -14,9 +14,9 @@ type Deck struct {
 func NewDeck() Deck {
 	c := []Card{}
 	for _, s := range validCardsuits {
-		suit := Suit{s[0], s[1]}
+		// suit := Suit{s[0], s[1]}
 		for _, v := range validCardTypes {
-			c = append(c, Card{suit, v})
+			c = append(c, Card{Suit{s[0], s[1]}, v})
 		}
 	}
 	d := Deck{c}
