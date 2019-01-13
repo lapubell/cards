@@ -23,7 +23,23 @@ func (c Card) IsValid() bool {
 	return false
 }
 
+// DrawSmall show just the type and suit symbol
+func (c Card) DrawSmall() string {
+	return c.Type + c.Suit.Symbol
+}
+
+// DrawFull an ASCII representation of this card
+func (c Card) DrawFull() string {
+	return `
+/-----\
+|  ` + c.Type + `  |
+|  ` + c.Suit.Symbol + `  |
+\-----/`
+}
+
 // ValueHigh return the highest value this card could be worth
+// TODO: this should be moved out of the cards package, as these values are
+// game specific
 func (c Card) ValueHigh() (int, error) {
 	if !c.IsValid() {
 		return 0, errors.New("Invalid Card")
